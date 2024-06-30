@@ -26,14 +26,17 @@ int main()
     do
     {
         cout << "To-do List:" << endl;
-        viewTasks(tasks);
+        viewTask(tasks);
         cout << endl;
         cout << "Menu:" << endl;
         cout << "1. Add Task" << endl;
         cout << "2. Mark Task Completed" << endl;
         cout << "3. Delete Task" << endl;
         cout << "Enter your choice: ";
+        cin >> option;
     }
+    while(0);
+
     return 0;
 }
 
