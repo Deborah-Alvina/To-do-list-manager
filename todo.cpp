@@ -1,11 +1,10 @@
 #include <iostream>
+#include <string>
 
 struct Task
 {
     int id;
     std::string description;
-    std::string dueDate;
-    int priority;
     bool completed;
 };
 
