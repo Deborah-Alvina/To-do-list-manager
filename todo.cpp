@@ -25,7 +25,7 @@ int main()
     do
     {
         // Display
-        cout << "To-do List:" << endl;
+        cout << endl << "To-do List:" << endl;
         viewTask(tasks);
         cout << endl;
         cout << "Menu:" << endl;
@@ -33,7 +33,7 @@ int main()
         cout << "2. Mark Task Completed" << endl;
         cout << "3. Delete Task" << endl;
         cout << "4. Exit" << endl;
-        cout << "Enter your choice: ";
+        cout << endl << "Enter your choice: ";
         cin >> option;
 
         // Menu
@@ -50,11 +50,12 @@ int main()
                 break;
             case 4:
                 cout << "Exiting..." << endl;
+                break;
             default:
                 cout << "Invalid choice, Please try again" << endl;
         }
     }
-    while (option != 5);
+    while (option != 4);
 
     return 0;
 }
@@ -78,10 +79,9 @@ void addTask(vector<Task>& tasks)
     cin.ignore();
     getline(cin, name);
     cout << "Enter task description: ";
-    cin.ignore();
     getline(cin, description);
     tasks.push_back({name, description, false});
-    cout << name << "added to tasks." << endl;
+    cout << name << " added to tasks." << endl;
 }
 
 // Marks a task as completed
@@ -93,7 +93,7 @@ void markTask(vector<Task>& tasks)
     if (num > 0 && num <= tasks.size())
     {
         tasks[num - 1].status = true;
-        cout << tasks[num - 1].name << "completed." << endl;
+        cout << tasks[num - 1].name << " completed." << endl;
     }
     else
     {
@@ -111,7 +111,7 @@ void deleteTask(vector<Task>& tasks)
     {
         string name = tasks[num - 1].name;
         tasks.erase(tasks.begin() + num - 1);
-        cout << name << "deleted." << endl;
+        cout << name << " deleted." << endl;
     }
     else
     {
