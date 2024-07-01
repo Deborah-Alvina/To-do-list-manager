@@ -32,10 +32,28 @@ int main()
         cout << "1. Add Task" << endl;
         cout << "2. Mark Task Completed" << endl;
         cout << "3. Delete Task" << endl;
+        cout << "4. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> option;
+
+        switch (option)
+        {
+            case 1:
+                addTask(tasks);
+                break;
+            case 2:
+                markTask(tasks);
+                break;
+            case 3:
+                deleteTask(tasks);
+                break;
+            case 4:
+                cout << "Exiting..." << endl;
+            default:
+                cout << "Invalid choice, Please try again" << endl;
+        }
     }
-    while(0);
+    while (option != 5);
 
     return 0;
 }
