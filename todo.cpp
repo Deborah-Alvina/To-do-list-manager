@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 // Task structure
@@ -11,16 +12,20 @@ struct Task
     bool status;
 };
 
-// Features
+// Functions
 void addTask(vector<Task>& tasks);
 void viewTask(vector<Task>& tasks);
 void markTask(vector<Task>& tasks);
 void deleteTask(vector<Task>& tasks);
+void saveTasks(vector<Task>& tasks, string& filename);
+void loadTasks(vector<Task>& tasks, string& filename);
 
 int main()
 {
     vector<Task> tasks;
     int option;
+    string filename = "todo.txt";
+    loadTasks(tasks, filename);
 
     do
     {
@@ -49,6 +54,7 @@ int main()
                 deleteTask(tasks);
                 break;
             case 4:
+                saveTasks(tasks, filename);
                 cout << "Exiting..." << endl;
                 break;
             default:
@@ -117,4 +123,42 @@ void deleteTask(vector<Task>& tasks)
     {
         cout << "Invalid task number." << endl;
     }
+}
+
+// Saves tasks to file
+void saveTasks(vector<Task>& tasks, string& filename)
+{
+    ofstream file(filename);
+    if (!file) {
+        cerr << "Error opening file for writing: " << filename << endl;
+        return;
+    }
+    for (auto& task : tasks)
+    {
+        file << task.name << endl;
+        file << task.description << endl;
+        file << task.status << endl;
+    }
+    file.close();
+}
+
+// Loads tasks from file
+void loadTasks(vector<Task>& tasks, string& filename)
+{
+    ifstream inFile(filename);
+    if (!inFile) {
+        cerr << "Error opening file for reading: " << filename << endl;
+        return;
+    }
+    string name;
+    string description;
+    bool status;
+    while (getline(inFile, name))
+    {
+        getline(inFile, description);
+        inFile >> status;
+        inFile.ignore(); 
+        tasks.push_back({name, description, status});
+    }
+    inFile.close();
 }
