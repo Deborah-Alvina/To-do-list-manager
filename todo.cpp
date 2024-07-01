@@ -22,9 +22,9 @@ int main()
     vector<Task> tasks;
     int option;
 
-    // Display
     do
     {
+        // Display
         cout << "To-do List:" << endl;
         viewTask(tasks);
         cout << endl;
@@ -36,6 +36,7 @@ int main()
         cout << "Enter your choice: ";
         cin >> option;
 
+        // Menu
         switch (option)
         {
             case 1:
@@ -58,6 +59,7 @@ int main()
     return 0;
 }
 
+// Displays current tasks
 void viewTask(vector<Task>& tasks)
 {
     for (int i = 0; i < tasks.size(); i++)
@@ -65,4 +67,54 @@ void viewTask(vector<Task>& tasks)
             cout << i + 1 << ") " << tasks[i].name << " - " << (tasks[i].status ? "Completed" : "Pending") << endl;
             cout << "   " << tasks[i].description << endl;
         }
+}
+
+// Adds a task
+void addTask(vector<Task>& tasks)
+{
+    string name;
+    string description;
+    cout << "Enter task name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Enter task description: ";
+    cin.ignore();
+    getline(cin, description);
+    tasks.push_back({name, description, false});
+    cout << name << "added to tasks." << endl;
+}
+
+// Marks a task as completed
+void markTask(vector<Task>& tasks)
+{
+    int num;
+    cout << "Enter the task number to be marked as completed: ";
+    cin >> num;
+    if (num > 0 && num <= tasks.size())
+    {
+        tasks[num - 1].status = true;
+        cout << tasks[num - 1].name << "completed." << endl;
+    }
+    else
+    {
+        cout << "Invalid task number." << endl;
+    }
+}
+
+// Deletes a task 
+void deleteTask(vector<Task>& tasks)
+{
+    int num;
+    cout << "Enter the task number to be deleted: ";
+    cin >> num;
+    if (num > 0 && num <= tasks.size())
+    {
+        string name = tasks[num - 1].name;
+        tasks.erase(tasks.begin() + num - 1);
+        cout << name << "deleted." << endl;
+    }
+    else
+    {
+        cout << "Invalid task number." << endl;
+    }
 }
